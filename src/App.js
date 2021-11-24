@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import NavBar from './components/NavBar'
 
 
 const App = () => {
-    return <h1>E-learning-app</h1>
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+
+    const handleAuth = () => {
+        setIsUserLoggedIn(!isUserLoggedIn)
+    }
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            handleAuth()
+
+        }
+
+    }, [])
+
+    return (
+        <div>
+            <NavBar isUserLoggedIn={isUserLoggedIn} handleAuth={handleAuth} />
+        </div>
+    )
 
 }
 
