@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { startUserRegister } from '../actions/usersAction'
+import { useDispatch } from 'react-redux'
 
 
 const Register = (props) => {
+
+    const dispatch = useDispatch()
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
@@ -29,6 +33,18 @@ const Register = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        const formData = {
+            username: username,
+            email: email,
+            password: password,
+            academy: {
+                name: name,
+                website: website
+            }
+        }
+        dispatch(startUserRegister(formData, props))
+
+
 
     }
 

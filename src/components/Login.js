@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
+import { startUserLogin } from '../actions/usersAction'
+import { useDispatch } from 'react-redux'
 
 const Login = (props) => {
+    const dispatch = useDispatch()
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -15,7 +18,12 @@ const Login = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(email, password)
+        const formData = {
+            email: email,
+            password: password
+        }
+        dispatch(startUserLogin(formData, props))
+
 
     }
     return (

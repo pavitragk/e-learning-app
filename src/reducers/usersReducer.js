@@ -6,7 +6,9 @@ const usersInitialState = {
 
 const usersReducer = (state = usersInitialState, action) => {
     switch (action.type) {
-
+        case 'USER_ACCOUNT': {
+            return { ...state, data: [action.payload] }
+        }
         default: {
             return { ...state.data }
         }
