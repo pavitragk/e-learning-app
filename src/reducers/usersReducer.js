@@ -8,6 +8,8 @@ const usersReducer = (state = usersInitialState, action) => {
     switch (action.type) {
         case 'USER_ACCOUNT': {
             return { ...state, data: [action.payload] }
+        } case 'UPDATE_USER': {
+            return { ...state, data: [action.payload] }
         }
         default: {
             return { ...state.data }

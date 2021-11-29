@@ -111,6 +111,31 @@ export const setAccount = (userData) => {
 
 }
 
+export const startUpdateUser = (formData) => {
+
+
+    return (dispatch) => axios.put('https://dct-e-learning.herokuapp.com/api/admin', formData, {
+        headers: {
+            'Authorization': localStorage.getItem('token')
+        }
+
+    }).then((response) => {
+        const result = response.data
+        dispatch(updateUser(result))
+
+    })
+
+}
+
+export const updateUser = (user) => {
+
+    return {
+        type: 'UPDATE_USER',
+        payload: user
+
+    }
+}
+
 
 
 
