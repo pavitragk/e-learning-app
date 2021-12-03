@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { startUserAccount } from '../actions/usersAction'
+import { startUserAccount, startStudentRegister } from '../actions/usersAction'
 
 import swal from '@sweetalert/with-react';
 import EditForm from './EditForm';
@@ -10,10 +10,11 @@ import EditForm from './EditForm';
 
 const AdminAccount = (props) => {
 
-    const [username, setUserName] = useState("")
-    const [role, setRole] = useState("")
-    const [academy, setAcademy] = useState("")
-    const [website, setWebsite] = useState("")
+
+    // const [username, setUserName] = useState("")
+    // const [role, setRole] = useState("")
+    // const [academy, setAcademy] = useState("")
+    // const [website, setWebsite] = useState("")
     const [toggle, setToggle] = useState(false)
     const [name, setname] = useState("")
     const [email, setEmail] = useState("")
@@ -36,67 +37,6 @@ const AdminAccount = (props) => {
     const handleToggle = () => {
         setToggle(!toggle)
     }
-
-
-    // console.log("acc", user?.[0])
-
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log(username, role, academy, website)
-
-
-
-    }
-
-
-
-    const handleStudentInput = (e) => {
-        if (e.taregt.name === "userName") {
-            setname(e.target.value)
-        } else if (e.taregt.name === "email") {
-            setEmail(e.taregt.value)
-        } else if (e.taregt.name === "password") {
-            setPassword(e.taregt.value)
-        }
-
-
-    }
-
-    const handleStudentAccount = (e) => {
-        e.preventDefault()
-        const formData = {
-
-
-        }
-
-    }
-
-    const handleStudent = () => {
-        swal(
-            <div>
-                <form onSubmit={handleStudentAccount}>
-                    <label>student name: </label>
-                    <input name="studentName" value={name} onChange={handleStudentInput}></input>
-                    <br />
-                    <label>email: </label>
-                    <input name="emial" value={email} onChange={handleStudentInput}></input>
-                    <br />
-                    <label>password: </label>
-                    <input name="password" value={password} onChange={handleStudentInput}></input>
-                    <br />
-                    <br />
-                    <button>add</button>
-                </form>
-            </div>
-        )
-            .then((value) => {
-                swal(`You typed: ${value}`);
-            });
-
-
-    }
-
-
 
     return (
         <div>
@@ -126,8 +66,6 @@ const AdminAccount = (props) => {
             {!toggle && <button onClick={handleToggle}>edit</button>}
             <br />
             <br />
-
-            <button onClick={handleStudent}>Add student</button>
 
         </div >
     )

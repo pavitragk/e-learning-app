@@ -1,4 +1,6 @@
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
+
 
 export const startUserRegister = (formData, props) => {
     return (dispatch) => {
@@ -44,7 +46,10 @@ export const startUserLogin = (formData, props) => {
                 if (result.hasOwnProperty('errors')) {
                     alert(result.errors)
                 } else {
-                    dispatch(setLogin(formData))
+                    var decodedData = jwt_decode(result.token);
+
+                    // console.log("jwt", decoded);
+                    dispatch(setLogin(decodedData))
                     alert('successfully logged in')
                     localStorage.setItem('token', result.token)
                     console.log(localStorage.token)
@@ -61,10 +66,10 @@ export const startUserLogin = (formData, props) => {
     }
 }
 
-export const setLogin = (formData) => {
+export const setLogin = (userData) => {
     return {
-        type: 'LOGIN_USERS',
-        payload: formData
+        type: 'LOGIN_USER',
+        payload: userData
 
 
     }
@@ -135,6 +140,174 @@ export const updateUser = (user) => {
 
     }
 }
+
+export const startStudentRegister = (formData, props) => {
+    return (dispatch) => {
+        axios.post('https://dct-e-learning.herokuapp.com/api/admin/students', formData, {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+
+            }
+        })
+            .then((response) => {
+
+                const result = response.data
+                if (result.hasOwnProperty('errors')) {
+                    alert(result.message)
+                } else {
+                    console.log(result)
+                    dispatch(registerStudent(result))
+
+
+                    // props.history.push('/students')
+                }
+
+            })
+            .catch((error) => {
+                console.log(error.message)
+
+
+            })
+
+
+    }
+}
+
+export const registerStudent = (user) => {
+
+    return {
+        type: 'REGISTER_STUDENT',
+        payload: user
+
+    }
+}
+
+export const startGetStudents = () => {
+    return (dispatch) => {
+        axios.get('https://dct-e-learning.herokuapp.com/api/admin/students', {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+
+            }
+        })
+            .then((response) => {
+
+                const result = response.data
+                if (result.hasOwnProperty('errors')) {
+                    alert(result.message)
+                } else {
+                    console.log(result)
+                    dispatch(getStudents(result))
+
+
+                }
+
+            })
+            .catch((error) => {
+                console.log(error.message)
+
+
+            })
+
+
+    }
+}
+
+export const getStudents = (users) => {
+
+    return {
+        type: 'STUDENTS',
+        payload: users
+
+    }
+}
+
+
+
+export const startDeleteStudent = (id) => {
+
+    return (dispatch) => {
+        axios.delete(`https://dct-e-learning.herokuapp.com/api/admin/students/${id}`, {
+            headers: {
+                'Authorization': localStorage.getItem('token')
+
+            }
+        })
+            .then((response) => {
+
+                const result = response.data
+                if (result.hasOwnProperty('errors')) {
+                    alert(result.message)
+                } else {
+                    // console.log("student", result)
+                    dispatch(deleteStudent(result))
+
+
+                }
+
+            })
+            .catch((error) => {
+                console.log(error.message)
+
+
+            })
+
+
+    }
+}
+
+export const deleteStudent = (student) => {
+
+    return {
+        type: 'STUDENT_DELETE',
+        payload: student
+
+    }
+}
+
+export const startStudentLogin = (formData, props) => {
+    return (dispatch) => {
+        axios.post('https://dct-e-learning.herokuapp.com/api/students/login', formData)
+            .then((res) => {
+                const result = res.data
+                if (result.hasOwnProperty('errors')) {
+                    alert(result.errors)
+                } else {
+                    var decodedData = jwt_decode(result.token);
+
+                    // console.log("jwt", decoded);
+                    dispatch(setStudent(decodedData))
+                    alert('successfully logged in')
+                    localStorage.setItem('token', result.token)
+                    console.log(localStorage.token)
+                    props.history.push('/home')
+                    props.handleAuth()
+
+                }
+
+            })
+            .catch((res) => {
+                alert(res.message)
+            })
+
+    }
+}
+
+export const setStudent = (userData) => {
+    return {
+        type: 'LOGIN_STUDENT',
+        payload: userData
+
+
+    }
+
+
+}
+
+
+
+
+
 
 
 

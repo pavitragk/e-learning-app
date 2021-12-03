@@ -1,10 +1,12 @@
 import React from 'react'
 
 
-const HomeScreen = () => {
+const Dashboard = (props) => {
+
     return (
-        <div>Student dashboard</div>
+        <div>dashboard goes here</div>
     )
+
 }
 
-export default HomeScreen
+export default Dashboard
