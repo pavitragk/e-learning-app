@@ -1,3 +1,5 @@
+import { Container, TextField, Button } from '@mui/material'
+import { margin } from '@mui/system'
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { startUpdateUser } from '../actions/usersAction'
@@ -47,19 +49,23 @@ const EditForm = (props) => {
         // console.log("edit", formData)
     }
     return (
-        <form onSubmit={handleSubmit}>
-            <label>Username: </label>
-            <input onChange={handleChange} name="username" value={username} /><br />
-            <label>Email: </label>
-            <input onChange={handleChange} email="email" value={email} />
-            <label>Role: </label>
-            <input onChange={handleChange} name="role" value={role} /><br />
-            <label>Academy: </label>
-            <input onChange={handleChange} name="academy" value={academy} /><br />
-            <label>Website: </label>
-            <input onChange={handleChange} name="website" value={website} /><br />
-            <button>Save</button>
-        </form>
+
+        <form style={{ margin: "100px" }} onSubmit={handleSubmit}>
+            <TextField id="standard-basic" label="Username" variant="standard" onChange={handleChange} name="username" value={username} />
+            < br />
+            <TextField id="standard-basic" label="Email" variant="standard" onChange={handleChange} email="email" value={email} />
+            <br />
+            <TextField id="standard-basic" label="Role" variant="standard" onChange={handleChange} name="role" value={role} />
+            <br />
+            <TextField id="standard-basic" label="Academy" variant="standard" onChange={handleChange} name="academy" value={academy} />
+            <br />
+            <TextField id="standard-basic" label="Website" variant="standard" onChange={handleChange} name="website" value={website} />
+            <br />
+            <br />
+            <Button type="submit" variant="contained">Save</Button>
+        </form >
+
+
     )
 
 }

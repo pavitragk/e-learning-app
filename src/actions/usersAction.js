@@ -6,20 +6,19 @@ export const startUserRegister = (formData, props) => {
     return (dispatch) => {
         axios.post('https://dct-e-learning.herokuapp.com/api/admin/register', formData)
             .then((response) => {
-
                 const result = response.data
                 if (result.hasOwnProperty('errors')) {
-                    alert(result.message)
+                    alert(result.errors)
                 } else {
-                    // console.log(result)
-                    dispatch(setUser(result))
+                    console.log(result)
+                    dispatch(setUser(result.notice))
                     alert("admin successfully created")
                     props.history.push('/login')
                 }
 
             })
             .catch((error) => {
-                console.log(error.message)
+                console.log(error)
 
 
             })

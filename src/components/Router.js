@@ -8,6 +8,9 @@ import Register from './Register'
 import StudentContainer from './StudentContainer'
 import StudentLogin from './StudentLogin'
 import { useSelector } from 'react-redux'
+import AdminCourses from './Courses/AdminCourses'
+import StudentCourses from './StudentCourses'
+import CourseContaiiner from './Courses/CourseContainer'
 
 
 const Router = (props) => {
@@ -15,11 +18,6 @@ const Router = (props) => {
     const user = useSelector((state) => {
         return state.users.user
     })
-
-    if (user) {
-        console.log("user", user)
-    }
-
 
 
     return (
@@ -30,12 +28,35 @@ const Router = (props) => {
             {isUserLoggedIn ? (
 
                 <div>
-                    <Route path="/dashboard" component={Dashboard} exact={true} />
-                    <Route path="/adminAccount" component={AdminAccount} exact={true} />
-                    <Route path="/students" component={StudentContainer} exact={true} />
+                    {user?.role === 'student' ?
+
+                        (
+                            <div>
+
+
+                                <Route path='/mycourses' component={StudentCourses} exact={true} />
+
+                            </div>
+
+                        ) : (
+                            <div>
+                                <Route path="/dashboard" component={Dashboard} exact={true} />
+                                <Route path="/adminAccount" component={AdminAccount} exact={true} />
+                                <Route path="/students" component={StudentContainer} exact={true} />
+                                <Route path='/courses' component={CourseContaiiner} exact={true} />
+
+                            </div>
+                        )}
+
+
+
 
                 </div>
+
+
             )
+
+
 
                 :
                 <>

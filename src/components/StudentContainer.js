@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import StudentsForm from './StudentsForm'
 import StudentTable from './StudentTable'
 import { startGetStudents } from '../actions/usersAction'
+import { Container } from '@mui/material'
 
 
 const StudentContainer = (props) => {
@@ -19,18 +20,21 @@ const StudentContainer = (props) => {
     }, [toggle])
 
     return (
-        <div>
-            {toggle ? <StudentsForm handleClick={handleClick} /> :
-                <div>
+        <Container style={{ margin: "100px" }} sx={{ m: 2 }} component="main" maxWidth="xs">
 
-                    <button onClick={handleClick}>Add student</button>
-                </div>
-            }
-            <StudentTable toggle={toggle} />
+            <div>
+                {toggle ? <StudentsForm handleClick={handleClick} /> :
+                    <div>
+
+                        <button onClick={handleClick}>Add student</button>
+                    </div>
+                }
+                <StudentTable toggle={toggle} />
 
 
 
-        </div>
+            </div>
+        </Container>
     )
 
 }

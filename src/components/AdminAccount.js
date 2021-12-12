@@ -4,6 +4,7 @@ import { startUserAccount, startStudentRegister } from '../actions/usersAction'
 
 import swal from '@sweetalert/with-react';
 import EditForm from './EditForm';
+import { Container, Typography } from '@mui/material';
 
 
 
@@ -39,35 +40,43 @@ const AdminAccount = (props) => {
     }
 
     return (
-        <div>
-            {toggle ? (
-                <>
-                    <EditForm username={user?.[0]?.username}
-                        role={user?.[0].role}
-                        academy={user?.[0]?.academy?.name}
-                        website={user?.[0]?.academy?.website}
-                        email={user?.[0]?.email}
-                        handleToggle={handleToggle}
-                    />
+        <Container style={{ margin: "100px" }} sx={{ m: 2 }} component="main" maxWidth="xs">
+            <div>
+                {toggle ? (
+                    <>
+                        <EditForm username={user?.[0]?.username}
+                            role={user?.[0].role}
+                            academy={user?.[0]?.academy?.name}
+                            website={user?.[0]?.academy?.website}
+                            email={user?.[0]?.email}
+                            handleToggle={handleToggle}
+                        />
 
-                </>
 
-            ) :
-                (
-                    <div>
-                        <h1>username : {user?.[0]?.username}</h1>
-                        <h2>email: {user?.[0]?.email}</h2>
-                        <h2>role: {user?.[0].role}</h2>
-                        <h3>academy: {user?.[0]?.academy?.name}</h3>
-                        <h3>website: {user?.[0]?.academy?.website}</h3>
-                    </div>
-                )}
+                    </>
 
-            {!toggle && <button onClick={handleToggle}>edit</button>}
-            <br />
-            <br />
 
-        </div >
+
+                ) :
+                    (
+                        <div>
+                            <Typography variant="h6" gutterBottom component="div">username: {user?.[0]?.username}</Typography>
+                            <Typography variant="h6" gutterBottom component="div">email: {user?.[0]?.email}</Typography>
+                            <Typography variant="h6" gutterBottom component="div">role: {user?.[0].role}</Typography>
+                            <Typography variant="h6" gutterBottom component="div">academy: {user?.[0]?.academy?.name}</Typography>
+                            <Typography variant="h6" gutterBottom component="div">website: {user?.[0]?.academy?.website}</Typography>
+
+                        </div>
+                    )}
+
+                {!toggle && <button onClick={handleToggle}>edit</button>}
+                <br />
+                <br />
+
+            </div >
+
+        </Container>
+
     )
 
 }
